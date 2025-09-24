@@ -1,4 +1,6 @@
-public class MathLogic {
+package service;
+
+public class CalculaTurmas {
     public double calcularMedia(double m2Sala, int numAlunos){
         if(numAlunos<=0){
             //Lança um erro ou retorna 0 para indicar cálculo impossível
