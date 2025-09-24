@@ -1,0 +1,15 @@
+{
+  "name": "Calculadora de Turma",
+  "version": "1.0.0",
+  "description": "Aplicação para cálculo de médias e proporções em turmas",
+  "author": "Marvyn Madeira",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MarvynMadeira/Calculadora-de-turma"
+  },
+  "build": {
+    "date": "2025-09-24T11:00:00Z",
+    "commit": "abc123def456"
+  }
+}
