@@ -1,7 +1,7 @@
 package controllers;
 
-import model.Turma;
 import service.CalculaTurmas;
+import model.Turma;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -37,7 +37,7 @@ public class CalculadoraController {
             int numAlunos = Integer.parseInt(numAlunosField.getText());
             double m2Sala = Double.parseDouble(m2SalaField.getText());
 
-            mediaCalculada = CalculaTurmasService.calcularMedia(m2Sala, numAlunos);
+            mediaCalculada = CalculaTurmas.calcularMedia(m2Sala, numAlunos);
             resultadoLabel.setText(String.format("%.2f m² por aluno", mediaCalculada));
             aplicarButton.setDisable(false);
 

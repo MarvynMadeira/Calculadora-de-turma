@@ -1,7 +1,7 @@
 package service;
 
 public class CalculaTurmas {
-    public double calcularMedia(double m2Sala, int numAlunos){
+    public static double calcularMedia(double m2Sala, int numAlunos){
         if(numAlunos<=0){
             throw new IllegalArgumentException("Número de alunos deve ser acima de 0.");
         }

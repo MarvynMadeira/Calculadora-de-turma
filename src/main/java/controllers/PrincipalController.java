@@ -128,9 +128,9 @@ public class PrincipalController {
         HBox linhaTurma = new HBox(15);
         linhaTurma.setStyle("-fx-alignment: center-left; -fx-padding: 5;");
 
-        Label labelTurma = new Label("Turma: " + turma.getNome());
-        Label labelAlunos = new Label("Alunos: " + turma.getNumAlunos());
-        Label labelMedia = new Label("Média: " + turma.getMediaM2() + " m²");
+        Label labelTurma = new Label("Turma: " + turma.getTurma());
+        Label labelAlunos = new Label("Alunos: " + turma.getNum_de_alunos());
+        Label labelMedia = new Label("Média: " + turma.getMetro_quadrado_sala() + " m²");
 
         labelTurma.setPrefWidth(200);
         labelAlunos.setPrefWidth(150);
@@ -182,11 +182,11 @@ public class PrincipalController {
                         Row linha = planilha.createRow(rowIndex++);
                         linha.createCell(0).setCellValue(turma.getEscola());
                         linha.createCell(1).setCellValue(turma.getSala());
-                        linha.createCell(2).setCellValue(turma.getNome());
-                        linha.createCell(3).setCellValue(turma.getNumAlunos());
-                        linha.createCell(4).setCellValue(turma.getMediaM2());
-                        linha.createCell(5).setCellValue(turma.getAtendeInferior());
-                        linha.createCell(6).setCellValue(turma.getAtendeSuperior());
+                        linha.createCell(2).setCellValue(turma.getTurma());
+                        linha.createCell(3).setCellValue(turma.getNum_de_alunos());
+                        linha.createCell(4).setCellValue(turma.getMetro_quadrado_sala());
+                        linha.createCell(5).setCellValue(turma.getInferior_ou_igual_a());
+                        linha.createCell(6).setCellValue(turma.getSuperior_ou_igual_a());
                     }
                 }
 
@@ -215,13 +215,13 @@ public class PrincipalController {
             UpdateService.UpdateInfo updateInfo = updateInfoOpt.get();
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Atualização Encontrada");
-            alert.setHeaderText("Uma nova versão (" + updateInfo.version() + ") está disponível!");
+            alert.setHeaderText("Uma nova versão (" + updateInfo.latestVersion() + ") está disponível!");
             alert.setContentText("Deseja abrir a página de download?");
 
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 try {
-                    Desktop.getDesktop().browse(new URI(updateInfo.url()));
+                    Desktop.getDesktop().browse(new URI(updateInfo.downloadUrl()));
                 } catch (Exception e) {
                     mostrarAlerta(Alert.AlertType.ERROR, "Erro", "Não foi possível abrir o navegador.");
                 }

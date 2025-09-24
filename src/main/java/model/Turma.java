@@ -12,7 +12,7 @@ public class Turma {
     private final StringProperty inferior_ou_igual_a;
     private final StringProperty superior_ou_igual_a;
 
-    public Turma(String escola, String sala, String turma, int num_de_alunos, double metro_quadrado_sala,double inferior_ou_igual_a,  double superior_ou_igual_a) {
+    public Turma(String escola, String sala, String turma, int num_de_alunos, double metro_quadrado_sala, String inferior_ou_igual_a, String superior_ou_igual_a) {
         this.escola = new SimpleStringProperty(escola);
         this.sala = new SimpleStringProperty(sala);
         this.turma = new SimpleStringProperty(turma);
