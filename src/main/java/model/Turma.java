@@ -18,8 +18,8 @@ public class Turma {
         this.turma = new SimpleStringProperty(turma);
         this.num_de_alunos = new SimpleStringProperty(String.valueOf(num_de_alunos));
         this.metro_quadrado_sala = new SimpleStringProperty(String.format("%.2f", metro_quadrado_sala));
-        this.inferior_ou_igual_a = new SimpleStringProperty(String.format("%.2f", inferior_ou_igual_a));
-        this.superior_ou_igual_a = new SimpleStringProperty(String.format("%.2f", superior_ou_igual_a));
+        this.inferior_ou_igual_a = new SimpleStringProperty(inferior_ou_igual_a);
+        this.superior_ou_igual_a = new SimpleStringProperty(superior_ou_igual_a);
     }
 
     public String getEscola() { return escola.get(); }
@@ -35,6 +35,6 @@ public class Turma {
     public StringProperty turmaProperty() { return turma; }
     public StringProperty num_de_alunosProperty() { return num_de_alunos; }
     public StringProperty metro_quadrado_salaProperty() { return metro_quadrado_sala; }
-    public StringProperty inferior_ou_igual_aProperty() { return superior_ou_igual_a; }
+    public StringProperty inferior_ou_igual_aProperty() { return inferior_ou_igual_a; }
     public StringProperty superior_ou_igual_aProperty() { return superior_ou_igual_a; }
 }

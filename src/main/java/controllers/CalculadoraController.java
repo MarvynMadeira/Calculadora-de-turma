@@ -55,23 +55,23 @@ public class CalculadoraController {
     public void handleAplicar(){
         if (isInputValid()) {
             String escola = escolaField.getText();
-            String sala = escolaField.getText();
+            String sala = salaField.getText();
             String nomeTurma = turmaField.getText();
             int numAlunos = Integer.parseInt(numAlunosField.getText());
 
-            String atendeInferior = "N/A";
+            String inferior_ou_igual_a = "N/A";
             if (!inferiorAField.getText().isBlank()) {
                 double limiteInferior = Double.parseDouble(inferiorAField.getText());
-                atendeInferior = mediaCalculada <= limiteInferior ? "Sim" : "Não";
+                inferior_ou_igual_a = mediaCalculada <= limiteInferior ? "Sim" : "Não";
             }
 
-            String atendeSuperior = "N/A";
+            String superior_ou_igual = "N/A";
             if (!superiorAField.getText().isBlank()) {
                 double limiteSuperior = Double.parseDouble(superiorAField.getText());
-                atendeSuperior = mediaCalculada >= limiteSuperior ? "Sim" : "Não";
+                superior_ou_igual = mediaCalculada >= limiteSuperior ? "Sim" : "Não";
             }
 
-            Turma novaTurma = new Turma(escola, sala, nomeTurma, numAlunos, mediaCalculada, atendeInferior, atendeSuperior);
+            Turma novaTurma = new Turma(escola, sala, nomeTurma, numAlunos, mediaCalculada, inferior_ou_igual_a, superior_ou_igual);
             principalController.addTurma(novaTurma);
 
             dialogStage.close();
@@ -84,10 +84,12 @@ public class CalculadoraController {
         if (escolaField.getText() == null || escolaField.getText().isBlank()) {
             errorMessage += "Nome da escola é obrigatório. \n";
         }
-        if (salaField.getText() == null || !salaField.getText().isBlank()) {
+        // Lógica de validação corrigida
+        if (salaField.getText() == null || salaField.getText().isBlank()) {
             errorMessage += "Nome da sala é obrigatório. \n";
         }
-        if (turmaField.getText() == null || !turmaField.getText().isBlank()) {
+        // Lógica de validação corrigida
+        if (turmaField.getText() == null || turmaField.getText().isBlank()) {
             errorMessage += "Nome da turma é obrigatório. \n";
         }
 

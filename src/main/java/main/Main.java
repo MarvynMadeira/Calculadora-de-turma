@@ -15,7 +15,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader fmxlLoader = new FXMLLoader(Main.class.getResource("Principal.fxml"));
+        FXMLLoader fmxlLoader = new FXMLLoader(getClass().getResource("/fxml/Principal.fxml"));
         Scene scene = new Scene(fmxlLoader.load(), 800, 600);
 
         primaryStage.setTitle("Calculadora de Turmas");

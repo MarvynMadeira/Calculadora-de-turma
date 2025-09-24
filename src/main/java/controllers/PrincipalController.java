@@ -18,6 +18,17 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
+
+import java.awt.Desktop;
+import java.awt.Toolkit;
+import java.awt.datatransfer.StringSelection;
+import java.net.URI;
+
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -41,8 +52,8 @@ public class PrincipalController {
     @FXML
     public void handleNovaAnalise() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("CalculadoraView.fxml"));
-            AnchorPane page = fxmlLoader.load();
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/fxml/Calculadora.fxml"));
+            VBox page = fxmlLoader.load();
 
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Nova Análise de Turma");
@@ -235,6 +246,84 @@ public class PrincipalController {
     private void handleFechar() {
         Stage stage = (Stage) escolaTabPane.getScene().getWindow();
         stage.fireEvent(new javafx.stage.WindowEvent(stage, javafx.stage.WindowEvent.WINDOW_CLOSE_REQUEST));
+    }
+
+    @FXML
+    private void handleReportarErro() {
+        try {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Reportar Erro");
+            alert.setHeaderText("Entre em contato para reportar erros ou sugestões");
+
+            String email = "madeiramarvyn@gmai.com";
+            String conteudoEmail = "Para reportar erros ou enviar sugestões:\n\n" +
+                    "📧 Email: " + email + "\n\n" +
+                    "Por favor, inclua:\n" +
+                    "• Descrição detalhada do problema\n" +
+                    "• Passos para reproduzir o erro\n" +
+                    "• Capturas de tela (se possível)\n" +
+                    "• Versão do sistema operacional\n\n" +
+                    "Clique em 'Copiar Email' para copiar o endereço\n" +
+                    "ou 'Abrir Email' para abrir seu cliente de email.";
+
+            TextArea textArea = new TextArea(conteudoEmail);
+            textArea.setEditable(false);
+            textArea.setWrapText(true);
+            textArea.setMaxWidth(Double.MAX_VALUE);
+            textArea.setMaxHeight(Double.MAX_VALUE);
+
+            GridPane expContent = new GridPane();
+            expContent.setMaxWidth(Double.MAX_VALUE);
+            expContent.add(textArea, 0, 0);
+
+            alert.getDialogPane().setContent(expContent);
+
+            ButtonType copiarEmailBtn = new ButtonType("Copiar Email");
+            ButtonType abrirEmailBtn = new ButtonType("Abrir Email");
+            ButtonType fecharBtn = new ButtonType("Fechar");
+
+            alert.getButtonTypes().setAll(copiarEmailBtn, abrirEmailBtn, fecharBtn);
+
+            alert.getDialogPane().setPrefSize(500, 350);
+            alert.setResizable(true);
+
+            alert.showAndWait().ifPresent(response -> {
+                if (response == copiarEmailBtn) {
+                    copiarParaClipboard(email);
+                    mostrarAlerta(Alert.AlertType.INFORMATION, "Sucesso", "Email copiado para a área de transferência!");
+                } else if (response == abrirEmailBtn) {
+                    abrirClienteEmail(email);
+                }
+            });
+        } catch (Exception e) {
+            mostrarAlerta(Alert.AlertType.ERROR, "Erro", "Erro ao abrir dialog de contato.");
+            e.printStackTrace();
+        }
+    }
+
+    private void copiarParaClipboard(String texto) {
+        try {
+            StringSelection stringSelection = new StringSelection(texto);
+            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
+        } catch (Exception e) {
+            mostrarAlerta(Alert.AlertType.ERROR, "Erro", "Não foi possível copiar o email.");
+        }
+    }
+
+    private void abrirClienteEmail(String email) {
+        try {
+            String assunto = "Calculadora - Reporte de Erro";
+            String corpo = "Olá,%0A%0AEstou reportando um erro/sugestão:%0A%0A[Descreva o problema aqui]%0A%0AObrigado!";
+            String mailtoLink = "mailto:" + email + "?subject=" + assunto + "&body=" + corpo;
+
+            Desktop.getDesktop().browse(new URI(mailtoLink));
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Abrir Email Manualmente");
+            alert.setHeaderText("Não foi possível abrir o cliente de email automaticamente");
+            alert.setContentText("Por favor, envie um email manualmente para:\n" + email);
+            alert.showAndWait();
+        }
     }
 
     private void mostrarAlerta(Alert.AlertType tipo, String titulo, String mensagem) {
