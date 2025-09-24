@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PrincipalController">
+    <top>
+        <MenuBar BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemoicParsing="false" text="Arquivo">
+                    <items>
+                        <MenuItem mnemoicParsing="false" onAction="#handleNovaAnalise" text="Nova Análise..."/>
+                            <MenuItem mnemoicParsing="false" onAction="#handleExportarExcel" text="Exportar para Excel..."/>
+                        <SeparatorMenuItem mnemoicParsing="false" />
+                        <MenuItem mnemoicParsing="false" onAction="#handleFechar" text="Fechar" />
+                    </items>
+                </Menu>
+                <Menu mnemoicParsing="false" text="Ajuda">
+                    <items>
+                        <MenuItem mnemoicParsing="false" onAction="#handleVerificarAtualizacoes" text="Verificar Atualizações..." />
+                            <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleReportarErro" text="Reportar Erro..." />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <center>
+        <TabPane fx:id="escolaTabPane" tabClosingPolicy="UNAVAILABLE" BorderPane.aligment="CENTER" />
+    </center>
+</BorderPane>
